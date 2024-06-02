@@ -1,0 +1,7 @@
+# Настройки подключения к бд
+spring:
+  datasource:
+    driver-class-name: ${DATASOURCE_DRIVER:org.postgresql.Driver}
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/diplom}
+  liquibase:
+    change-log: db/liquibase.yaml

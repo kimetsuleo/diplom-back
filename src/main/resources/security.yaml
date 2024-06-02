@@ -1,0 +1,5 @@
+security:
+  jwt:
+    #время жизни токена в минутах
+    expired: 60
+    secret: myverysecrettokenandifuckdiplom1231dx2ffc213

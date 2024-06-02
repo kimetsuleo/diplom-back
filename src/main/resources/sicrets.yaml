@@ -1,0 +1,9 @@
+# Настройки серктных данный
+spring:
+  datasource:
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+  # Настройки ликвы
+  liquibase:
+    user: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}

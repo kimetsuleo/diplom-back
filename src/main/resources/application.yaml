@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: diplom
+  config:
+    import:
+      - classpath:datasource.yaml
+      - classpath:sicrets.yaml
+      - classpath:security.yaml
