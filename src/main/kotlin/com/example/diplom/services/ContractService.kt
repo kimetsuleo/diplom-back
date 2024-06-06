@@ -6,7 +6,7 @@ import com.example.diplom.exceptions.NotFoundException
 import com.example.diplom.repositories.ContractRepository
 import com.example.diplom.repositories.EmployeeRepository
 import com.example.diplom.repositories.PositionRepository
-import com.example.diplom.utils.getEmployee
+import com.example.diplom.utils.EmployeeContext
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
@@ -17,14 +17,15 @@ import java.time.LocalDateTime
 class ContractService(
     private val repository: ContractRepository,
     private val employeeRepository: EmployeeRepository,
-    private val positionRepository: PositionRepository
+    private val positionRepository: PositionRepository,
+    private val context: EmployeeContext
 ) {
 
     fun getAll() =
-        getEmployee()?.let { repository.findAllByEmployeeEmail(it) } ?: throw NotFoundException()
+        context.getEmployee().let { repository.findAllByEmployeeEmail(it.email) }
 
     fun getById(id: Long) =
-        getEmployee()?.let { repository.findByIdAndEmployeeEmail(id, it) } ?: throw NotFoundException()
+        context.getEmployee().let { repository.findByIdAndEmployeeEmail(id, it.email) }
 
     fun create(req: ContractRequest) {
         val emp = employeeRepository.findById(req.employee).orElseThrow { throw NotFoundException() }

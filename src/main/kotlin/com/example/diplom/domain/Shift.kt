@@ -1,6 +1,7 @@
 package com.example.diplom.domain
 
 import jakarta.persistence.*
+import java.time.DayOfWeek
 import java.time.LocalDateTime
 
 /**
@@ -15,9 +16,8 @@ data class Shift(
     @Column(name = "id", unique = true, nullable = false)
     val id: Long?,
 
-    @ManyToOne
-    @JoinColumn(name = "day_id", nullable = false)
-    val day: Day,
+    @Enumerated(EnumType.STRING)
+    val day: DayOfWeek,
 
     @Column(name = "start_at", nullable = false)
     val startAt: LocalDateTime,

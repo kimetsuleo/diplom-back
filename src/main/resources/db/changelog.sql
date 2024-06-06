@@ -108,26 +108,6 @@ create table contracts
 --rollback drop sequence s_contract;
 --rollback drop table contracts;
 
---changeset l.frolenkov:D-04
-create sequence s_day START WITH 1 INCREMENT BY 1;
-
-create table days
-(
-    id   int               not null,
-    name varchar(255)      not null,
-    type character varying not null,
-
-    constraint pk_day primary key (id)
-);
-
-insert into days(id, name, type)
-values ((SELECT NEXTVAL('s_day')), 'Понедельник', 'WORKER');
-values ((SELECT NEXTVAL('s_day')), 'Вторник', 'WORKER');
-values ((SELECT NEXTVAL('s_day')), 'Среда', 'WORKER');
-values ((SELECT NEXTVAL('s_day')), 'Четверг', 'WORKER');
-values ((SELECT NEXTVAL('s_day')), 'Пятница', 'WORKER');
-values ((SELECT NEXTVAL('s_day')), 'Суббота', 'DAYOFF');
-values ((SELECT NEXTVAL('s_day')), 'Воскресенье', 'DAYOFF');
 
 --changeset l.frolenkov:D-05
 create sequence s_shift START WITH 1 INCREMENT BY 1;
@@ -135,12 +115,11 @@ create sequence s_shift START WITH 1 INCREMENT BY 1;
 create table shifts
 (
     id       int                      not null,
-    day_id   int                      not null,
+    day      character varying        not null,
     start_at timestamp with time zone not null,
     end_at   timestamp with time zone not null,
 
-    constraint pk_shift primary key (id),
-    constraint fk_shift_day_id foreign key (day_id) references days (id)
+    constraint pk_shift primary key (id)
 );
 
 --changeset l.frolenkov:D-06
